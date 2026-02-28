@@ -2,7 +2,7 @@
 
 A lightweight Go library for JWT-based authentication with support for **access tokens**, **refresh tokens**, and helper functions for context and headers.
 
----
+
 
 ## Features
 
@@ -15,7 +15,7 @@ A lightweight Go library for JWT-based authentication with support for **access 
 - Configurable token TTL and signing method  
 - Easy to integrate into any Go project
 
----
+
 
 ## Installation
 
@@ -24,7 +24,7 @@ go get github.com/yourusername/go-auth
 
 ```
 
----
+
 
 ## Usage
 
@@ -57,7 +57,7 @@ func main() {
 }
 ```
 
----
+
 
 ### 2. Signing Tokens
 
@@ -78,7 +78,7 @@ refreshToken, err := authService.SignedRefreshToken(claims)
 
 
 Data is for any custom claims you might like to add but UserID is must
----
+
 
 ### 3. Validating Tokens
 
@@ -90,7 +90,7 @@ validatedClaims, err := authService.ValidateAccessToken(accessToken)
 refreshClaims, err := authService.ValidateRefreshToken(refreshToken)
 ```
 
----
+
 
 ### 4. Helper Functions
 
@@ -110,12 +110,12 @@ next.ServeHTTP(w, r.WithContext(ctx))
 
 ```
 
----
+
 
 ## Configuration Options
 
 | Field         | Description                         |
-| ------------- | ----------------------------------- |
+| - | -- |
 | AuthSecret    | Secret for signing access tokens    |
 | RefreshSecret | Secret for signing refresh tokens   |
 | Method        | JWT signing method (default: HS256) |
@@ -123,12 +123,12 @@ next.ServeHTTP(w, r.WithContext(ctx))
 | RefreshTTL    | Refresh token time-to-live          |
 
 
----
+
 
 ## Errors
 
 | Error                 | Description                                |
-| --------------------- | ------------------------------------------ |
+|  |  |
 | `ErrInvalidToken`     | Token is malformed or signature is invalid |
 | `ErrInvalidTokenType` | Token type mismatch (access vs refresh)    |
 | `ErrServiceNotReady`  | Auth service was not initialized           |
@@ -140,7 +140,7 @@ if errors.Is(err, ErrNotFound) {
 		fmt.Println("Found the expected error using errors.Is")
         or anything you like to do
 	}
----
+
 
 ## Tests
 
