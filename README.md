@@ -16,7 +16,7 @@ A lightweight Go library for JWT-based authentication with support for **access 
 ## Installation
 
 ```bash
-go get github.com/yourusername/go-auth
+go get github.com/SurajTechsmith/go-auth
 
 ```
 
@@ -31,7 +31,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yourusername/go-auth"
+	"github.com/SurajTechsmith/go-auth"
 	"github.com/golang-jwt/jwt/v5"
 )
 
