@@ -2,20 +2,16 @@
 
 A lightweight Go library for JWT-based authentication with support for **access tokens**, **refresh tokens**, and helper functions for context and headers.
 
-
-
 ## Features
 
-- Sign and validate **access tokens**  
-- Sign and validate **refresh tokens**  
-- Custom claims support (`JwtClaims`)  
+- Sign and validate **access tokens**
+- Sign and validate **refresh tokens**
+- Custom claims support (`JwtClaims`)
 - Helper functions:
   - Extract token from HTTP `Authorization` header
-  - Inject claims into `context.Context`  
-- Configurable token TTL and signing method  
+  - Inject claims into `context.Context`
+- Configurable token TTL and signing method
 - Easy to integrate into any Go project
-
-
 
 ## Installation
 
@@ -23,8 +19,6 @@ A lightweight Go library for JWT-based authentication with support for **access 
 go get github.com/yourusername/go-auth
 
 ```
-
-
 
 ## Usage
 
@@ -57,8 +51,6 @@ func main() {
 }
 ```
 
-
-
 ### 2. Signing Tokens
 
 ```go
@@ -76,9 +68,7 @@ accessToken, err := authService.SignAccessToken(claims)
 refreshToken, err := authService.SignedRefreshToken(claims)
 ```
 
-
 Data is for any custom claims you might like to add but UserID is must
-
 
 ### 3. Validating Tokens
 
@@ -89,8 +79,6 @@ validatedClaims, err := authService.ValidateAccessToken(accessToken)
 // Validate refresh token
 refreshClaims, err := authService.ValidateRefreshToken(refreshToken)
 ```
-
-
 
 ### 4. Helper Functions
 
@@ -110,37 +98,33 @@ next.ServeHTTP(w, r.WithContext(ctx))
 
 ```
 
-
-
 ## Configuration Options
 
 | Field         | Description                         |
-| - | -- |
+| ------------- | ----------------------------------- |
 | AuthSecret    | Secret for signing access tokens    |
 | RefreshSecret | Secret for signing refresh tokens   |
 | Method        | JWT signing method (default: HS256) |
 | AccessTTL     | Access token time-to-live           |
 | RefreshTTL    | Refresh token time-to-live          |
 
-
-
-
 ## Errors
 
-| Error                 | Description                                |
-|  |  |
-| `ErrInvalidToken`     | Token is malformed or signature is invalid |
-| `ErrInvalidTokenType` | Token type mismatch (access vs refresh)    |
-| `ErrServiceNotReady`  | Auth service was not initialized           |
-| `ErrMissingUserID`    | UserID is missing from claims              |
+| Error | Description |
+| --------------------- | ------------------------------------------ | 
+| `ErrInvalidToken` | Token is malformed or signature is invalid |
+| `ErrInvalidTokenType` | Token type mismatch (access vs refresh) |
+| `ErrServiceNotReady` | Auth service was not initialized |
+| `ErrMissingUserID` | UserID is missing from claims |
 
 
+```go
 use errors.Is to determine specific error
 if errors.Is(err, ErrNotFound) {
-		fmt.Println("Found the expected error using errors.Is")
-        or anything you like to do
-	}
-
+fmt.Println("Found the expected error using errors.Is")
+or anything you like to do
+}
+```
 
 ## Tests
 
@@ -150,6 +134,5 @@ Run unit tests:
 go test -v
 ```
 
-* Table-driven tests for all functions
-* Covers happy paths and common edge cases
-
+- Table-driven tests for all functions
+- Covers happy paths and common edge cases
