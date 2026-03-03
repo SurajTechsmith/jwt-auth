@@ -1,4 +1,4 @@
-# Go JWT Auth Library
+# Modular Authentication System (Go)
 
 A lightweight Go library for JWT-based authentication with support for **access tokens**, **refresh tokens**, and helper functions for context and headers.
 
