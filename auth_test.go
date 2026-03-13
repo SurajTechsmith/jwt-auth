@@ -60,7 +60,7 @@ func TestSignedRefreshToken(t *testing.T) {
 	auth, _ := NewAuthService(config)
 
 	claims := &JwtClaims{UserID: "456"}
-	token, err := auth.SignedRefreshToken(claims)
+	token, err := auth.SignRefreshToken(claims)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
@@ -79,7 +79,7 @@ func TestValidateRefreshToken(t *testing.T) {
 	auth, _ := NewAuthService(config)
 
 	claims := &JwtClaims{UserID: "456"}
-	token, _ := auth.SignedRefreshToken(claims)
+	token, _ := auth.SignRefreshToken(claims)
 
 	got, err := auth.ValidateRefreshToken(token)
 	if err != nil {

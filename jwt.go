@@ -16,10 +16,9 @@ type Config struct {
 }
 
 type JwtClaims struct {
-	UserID string `json:"user_id"`
-	Data   any    `json:"data,omitempty"`
-	Type   string `json:"type"`
-	Issuer string `json:"issuer"`
+	UserID string         `json:"user_id"`
+	Data   map[string]any `json:"data,omitempty"`
+	Type   string         `json:"type"`
 	jwt.RegisteredClaims
 }
 
@@ -29,12 +28,12 @@ type AuthService struct {
 
 func NewAuthService(config *Config) (*AuthService, error) {
 
-	if config.Method == nil {
-		config.Method = jwt.SigningMethodHS256
-	}
-
 	if config == nil {
 		return nil, ErrConfigNotReady
+	}
+
+	if config.Method == nil {
+		config.Method = jwt.SigningMethodHS256
 	}
 
 	return &AuthService{config: config}, nil
@@ -93,7 +92,7 @@ func (a *AuthService) ValidateAccessToken(tokenstring string) (*JwtClaims, error
 
 }
 
-func (a *AuthService) SignedRefreshToken(claims *JwtClaims) (string, error) {
+func (a *AuthService) SignRefreshToken(claims *JwtClaims) (string, error) {
 	if a == nil || a.config == nil {
 		return "", ErrServiceNotReady
 	}
@@ -131,6 +130,11 @@ func (a *AuthService) ValidateRefreshToken(tokenstring string) (*JwtClaims, erro
 	if err != nil {
 		return nil, err
 	}
+
+	if claims.Type != "refresh" {
+		return nil, ErrInvalidTokenType
+	}
+
 	if !token.Valid {
 		return nil, ErrInvalidToken
 	}

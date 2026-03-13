@@ -7,8 +7,6 @@ import (
 
 type claimCtxKey string
 
-const claimsKey claimCtxKey = "claims"
-
 func ExtractTokenHeader(header string) (string, error) {
 
 	if header == "" {
@@ -23,7 +21,7 @@ func ExtractTokenHeader(header string) (string, error) {
 	return str[1], nil
 }
 
-func InjectContext(ctx context.Context, claims JwtClaims) context.Context {
+func InjectContext(ctx context.Context, claims JwtClaims, claimsKey claimCtxKey) context.Context {
 	ctx = context.WithValue(ctx, claimsKey, claims)
 
 	return ctx
